@@ -1,8 +1,8 @@
 export interface UsersTable {
-    id: number;
-    email: string;
-    password: string;
-    created_at: Date;
+    id?: number;
+    email?: string;
+    password?: string;
+    created_at?: Date;
 }
 
 export interface MysqlResponse {

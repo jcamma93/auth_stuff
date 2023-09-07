@@ -1,18 +1,19 @@
 import * as jwt from 'jsonwebtoken';
 import config from '../../config';
-import * as passport from 'passport';
+import db from '../../db';
 import { Router } from 'express';
-import { ReqUser } from '../../types';
-
+import { generateHash } from '../../utils/passwords';
 
 const router = Router();
 
-
-
-router.post('/', passport.authenticate('local', { session: false }), async (req: ReqUser, res) => {
+router.post('/', async (req, res) => {
+    const newUser = req.body;
     try {
+        newUser.password = generateHash(newUser.password);
+        const result = await db.users.insert(newUser);
+        result.insertId
         const token = jwt.sign(
-            { userid: req.user!.id, email: req.user!.email, role: 1 },
+            { userid: result.insertId, email: newUser.email, role: 1 },
             config.jwt.secret!,
             { expiresIn: config.jwt.expires }
         );

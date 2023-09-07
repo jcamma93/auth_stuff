@@ -7,8 +7,8 @@ const App = (props: AppProps) => {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route exact path="/">
-					{() => <h1 className="text-center display-1">Home Page</h1>}
+				<Route  path="/">
+					{/* {() => <h1 className="text-center display-1">Home Page</h1>} */}
 				</Route>
 			</Routes></BrowserRouter>
 	)
