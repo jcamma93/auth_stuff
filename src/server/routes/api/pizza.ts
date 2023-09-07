@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import * as passport from 'passport';
+import { tokenCheck } from '../../middlewares/auth.mw';
 import { ReqUser } from '../../types';
 
 const router = Router();
 
-router.get('/', passport.authenticate('jwt', { session: false }), (req: ReqUser, res) => {
+router.get('/', tokenCheck, (req: ReqUser, res) => {
     try {
        res.json({ message: `Enjoy your Pizza Time ${req.user!.email}` });
     } catch (error) {

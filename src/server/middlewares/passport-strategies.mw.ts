@@ -49,7 +49,7 @@ export function configurePassport(app: Application) {
                 done(error);
             }
         }));
-    app.use(passport.initialize());
-}
+    app.use(passport.initialize()); 
+};
 
 
