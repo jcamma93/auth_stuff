@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { TOKEN_KEY } from '../services/api-service';
 
 const PrivateRoute = (props: PrivateRouteProps) => {
 
-    const TOKEN = localStorage.getItem('token');
+    const TOKEN = localStorage.getItem(TOKEN_KEY);
 
     if (!TOKEN) {
         return (

@@ -1,23 +1,18 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { apiService } from '../services/api-service';
+
 
 const Pizza = (props: PizzaProps) => {
 
     const [pizzaTime, setPizzaTime] = useState<{ message: string }>(null!);
-
+    const navigate = useNavigate(); 
     useEffect(() => {
-        const TOKEN = localStorage.getItem('token');
-
-        fetch('/api/pizza', {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${TOKEN}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => setPizzaTime(data));
-
-    }, [])
+        apiService('/api/pizza')
+        .then(data => setPizzaTime(data))
+        .catch(() => navigate('/login'))
+    }, []);
 
 
     return (
@@ -30,3 +25,4 @@ const Pizza = (props: PizzaProps) => {
 interface PizzaProps { }
 
 export default Pizza;
+
